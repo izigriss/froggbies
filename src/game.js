@@ -167,9 +167,60 @@ export function applySeason(idx) {
   }
 }
 
+export function initiateStartGameTransition() {
+  SoundFX.init();
+  SoundFX.playReadyLeap();
+  state.status = 'transitioning';
+  state.transitionTimer = 0;
+  state.transitionDuration = 0.75;
+  state.score = 0;
+  state.distance = 0;
+  state.fliesCaught = 0;
+  state.streak = 1;
+  state.comboTimer = 0;
+  state.difficultyTier = 1;
+  state.anchorZ = 2;
+  state.lives = 3;
+  state.invulnerableTimer = 0;
+  state.logSlideOffset = 0;
+  state.logSlideVel = 0;
+  state.deathTimer = 0;
+  state.camShake = 0;
+  state.leapTargetPlatform = null;
+  state.willSplashInWater = false;
+  state.isLeaping = false;
+  state.tongue.active = false;
+  state.isCharging = false;
+
+  applySeason(0);
+  resetRiverWorld();
+  updateHUD();
+
+  if (dom.startOverlay) {
+    dom.startOverlay.style.transition = 'opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+    dom.startOverlay.style.opacity = '0';
+    dom.startOverlay.style.pointerEvents = 'none';
+    dom.startOverlay.style.transform = 'scale(1.04)';
+    setTimeout(() => {
+      dom.startOverlay.classList.add('hidden');
+      dom.startOverlay.style.opacity = '';
+      dom.startOverlay.style.pointerEvents = '';
+      dom.startOverlay.style.transform = '';
+    }, 460);
+  }
+  if (dom.gameHUD) dom.gameHUD.classList.remove('hidden');
+  if (dom.pauseModal) dom.pauseModal.classList.add('hidden');
+  if (dom.gameOverModal) dom.gameOverModal.classList.add('hidden');
+}
+
 export function startNewGame() {
+  if (state.status === 'start') {
+    initiateStartGameTransition();
+    return;
+  }
   SoundFX.init();
   state.status = 'playing';
+  state.transitionTimer = 0;
   state.score = 0;
   state.distance = 0;
   state.fliesCaught = 0;
@@ -207,6 +258,7 @@ export function startNewGame() {
   if (dom.pauseModal) dom.pauseModal.classList.add('hidden');
   if (dom.gameOverModal) dom.gameOverModal.classList.add('hidden');
 }
+
 
 export function triggerGameOver(reason, deathType = 'swept') {
   if (state.status === 'dying' || state.status === 'gameover') return;

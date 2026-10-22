@@ -721,14 +721,15 @@ function updateGame(dt) {
 }
 
 // Render Loop
-function renderGame() {
+function renderGame(dt = 0.016) {
   if (state.status === 'start') {
     const bob = Math.sin(state.worldTime * 2.2) * 0.035;
-    camera.position.set(-0.92 + Math.sin(state.worldTime * 0.45) * 0.16, 2.38, 6.65);
-    camera.lookAt(0.28, 0.88, -1.5);
+    camera.position.set(-0.85 + Math.sin(state.worldTime * 0.45) * 0.14, 2.35, 6.45);
+    camera.lookAt(0.12, 0.72, 1.2);
 
-    frogRoot.position.set(1.52, 0.25 + bob, 2.35);
-    frogRoot.scale.setScalar(1.36);
+    // Center frog securely on top of the river's start lily pad (pad at x:0, baseY:0.06, z:2)
+    frogRoot.position.set(0.12, 0.38 + bob, 2.05);
+    frogRoot.scale.setScalar(1.28);
     frogSquashGroup.scale.set(
       1 + Math.sin(state.worldTime * 3.0) * 0.018,
       1 - Math.sin(state.worldTime * 3.0) * 0.018,
@@ -739,11 +740,87 @@ function renderGame() {
     frogHeadGroup.rotation.y = Math.sin(state.worldTime * 1.1) * 0.16;
     frogRoot.rotation.set(
       0.03 + Math.sin(state.worldTime * 1.8) * 0.015,
-      2.58 + Math.sin(state.worldTime * 0.75) * 0.10,
+      2.45 + Math.sin(state.worldTime * 0.75) * 0.10,
       0
     );
     const breath = 1 + Math.pow(Math.sin(state.worldTime * 3.4) * 0.5 + 0.5, 2) * 0.32;
     vocalSac.scale.set(1.05 * breath, 0.52 * breath, 1.05 * breath);
+  } else if (state.status === 'transitioning') {
+    state.transitionTimer += dt;
+    const dur = state.transitionDuration || 0.75;
+    const rawP = Math.min(1, state.transitionTimer / dur);
+    // Smooth cubic bezier ease-in-out
+    const t = rawP < 0.5 ? 4 * rawP * rawP * rawP : 1 - Math.pow(-2 * rawP + 2, 3) / 2;
+
+    // Start coordinates
+    const startCamX = -0.85;
+    const startCamY = 2.35;
+    const startCamZ = 6.45;
+    const startLookX = 0.12;
+    const startLookY = 0.72;
+    const startLookZ = 1.2;
+
+    const startFrogX = 0.12;
+    const startFrogY = 0.38;
+    const startFrogZ = 2.05;
+    const startYaw = 2.45;
+    const startScale = 1.28;
+
+    // Target gameplay coordinates
+    const targetCamX = 0;
+    const targetCamY = 7.4;
+    const targetCamZ = 2 + 9.2; // 11.2
+    const targetLookX = 0;
+    const targetLookY = 0.55;
+    const targetLookZ = 2 - 4.2; // -2.2
+
+    const targetFrogX = 0;
+    const targetFrogY = 0.35;
+    const targetFrogZ = 2;
+    const targetYaw = 0;
+    const targetScale = 1.0;
+
+    // Smoothly interpolate camera
+    camera.position.x = THREE.MathUtils.lerp(startCamX, targetCamX, t);
+    camera.position.y = THREE.MathUtils.lerp(startCamY, targetCamY, t);
+    camera.position.z = THREE.MathUtils.lerp(startCamZ, targetCamZ, t);
+
+    const curLookX = THREE.MathUtils.lerp(startLookX, targetLookX, t);
+    const curLookY = THREE.MathUtils.lerp(startLookY, targetLookY, t);
+    const curLookZ = THREE.MathUtils.lerp(startLookZ, targetLookZ, t);
+    camera.lookAt(curLookX, curLookY, curLookZ);
+
+    // Smoothly interpolate frog pose & crouch readying
+    const readyCrouchY = 1.0 - Math.sin(rawP * Math.PI) * 0.18; // organic squash & spring
+    const readyCrouchXZ = 1.0 + Math.sin(rawP * Math.PI) * 0.10;
+    frogSquashGroup.scale.set(readyCrouchXZ, readyCrouchY, readyCrouchXZ);
+
+    frogRoot.position.x = THREE.MathUtils.lerp(startFrogX, targetFrogX, t);
+    frogRoot.position.y = THREE.MathUtils.lerp(startFrogY, targetFrogY, t) - (1.0 - readyCrouchY) * 0.08;
+    frogRoot.position.z = THREE.MathUtils.lerp(startFrogZ, targetFrogZ, t);
+
+    const curYaw = THREE.MathUtils.lerp(startYaw, targetYaw, t);
+    frogRoot.rotation.set(0, curYaw, 0);
+    frogHeadGroup.rotation.y = THREE.MathUtils.lerp(frogHeadGroup.rotation.y, 0, t);
+    frogRoot.scale.setScalar(THREE.MathUtils.lerp(startScale, targetScale, t));
+
+    const breath = 1 + Math.pow(Math.sin(state.worldTime * 4.0) * 0.5 + 0.5, 2) * 0.28;
+    vocalSac.scale.set(1.05 * breath, 0.52 * breath, 1.05 * breath);
+
+    riverMesh.position.z = state.frogZ - 20;
+    sunLight.position.set(state.frogX + 16, 28, state.frogZ + 12);
+
+    if (rawP >= 1) {
+      state.status = 'playing';
+      state.frogX = 0;
+      state.frogY = 0.35;
+      state.frogZ = 2;
+      state.frogYaw = 0;
+      state.frogPitch = 0;
+      state.frogRoll = 0;
+      frogSquashGroup.scale.set(1, 1, 1);
+      frogRoot.scale.setScalar(1.0);
+    }
   } else {
     if (state.status !== 'dying' && state.status !== 'gameover') {
       const curScale = frogRoot.scale.x;
@@ -806,11 +883,14 @@ function animate(now) {
 
   if (state.status === 'playing' || state.status === 'dying' || state.status === 'gameover') {
     updateGame(dt);
+  } else if (state.status === 'transitioning') {
+    updateGame(dt);
   } else {
     updateGame(dt * 0.5);
   }
-  renderGame();
+  renderGame(dt);
 }
+
 
 // Event Listeners
 if (dom.startGameBtn) {

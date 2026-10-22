@@ -1,7 +1,10 @@
 import { getSavedHighScore } from './constants.js';
 
 export const state = {
-  status: 'start', // 'start' | 'playing' | 'dying' | 'paused' | 'gameover'
+  status: 'start', // 'start' | 'transitioning' | 'playing' | 'dying' | 'paused' | 'gameover'
+  transitionTimer: 0,
+  transitionDuration: 0.72,
+
   seasonIdx: 0,
   score: 0,
   highScore: getSavedHighScore(),
