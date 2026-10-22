@@ -725,17 +725,17 @@ function renderGame(dt = 0.016) {
   if (state.status === 'start') {
     const bob = Math.sin(state.worldTime * 2.2) * 0.035;
     camera.position.set(-0.85 + Math.sin(state.worldTime * 0.45) * 0.14, 2.38, 6.45);
-    camera.lookAt(0.35, 0.76, 1.2);
+    camera.lookAt(0.48, 0.78, 1.2);
 
-    // Keep start pad aligned beneath frog at x: 0.95
+    // Keep start pad aligned beneath frog at x: 1.35
     if (state.currentPlatform && state.currentPlatform.group) {
-      state.currentPlatform.group.position.x = 0.95;
-      state.currentPlatform.x = 0.95;
+      state.currentPlatform.group.position.x = 1.35;
+      state.currentPlatform.x = 1.35;
     }
 
     // Perch frog naturally on the lily pad on the right half of the screen
-    frogRoot.position.set(0.95, 0.38 + bob, 2.05);
-    frogRoot.scale.setScalar(1.32);
+    frogRoot.position.set(1.35, 0.38 + bob, 2.05);
+    frogRoot.scale.setScalar(1.30);
     frogSquashGroup.scale.set(
       1 + Math.sin(state.worldTime * 3.0) * 0.018,
       1 - Math.sin(state.worldTime * 3.0) * 0.018,
@@ -746,7 +746,7 @@ function renderGame(dt = 0.016) {
     frogHeadGroup.rotation.y = Math.sin(state.worldTime * 1.1) * 0.16;
     frogRoot.rotation.set(
       0.03 + Math.sin(state.worldTime * 1.8) * 0.015,
-      2.52 + Math.sin(state.worldTime * 0.75) * 0.10,
+      2.56 + Math.sin(state.worldTime * 0.75) * 0.10,
       0
     );
     const breath = 1 + Math.pow(Math.sin(state.worldTime * 3.4) * 0.5 + 0.5, 2) * 0.32;
@@ -762,15 +762,15 @@ function renderGame(dt = 0.016) {
     const startCamX = -0.85;
     const startCamY = 2.38;
     const startCamZ = 6.45;
-    const startLookX = 0.35;
-    const startLookY = 0.76;
+    const startLookX = 0.48;
+    const startLookY = 0.78;
     const startLookZ = 1.2;
 
-    const startFrogX = 0.95;
+    const startFrogX = 1.35;
     const startFrogY = 0.38;
     const startFrogZ = 2.05;
-    const startYaw = 2.52;
-    const startScale = 1.32;
+    const startYaw = 2.56;
+    const startScale = 1.30;
 
     // Target gameplay coordinates
     const targetCamX = 0;
@@ -788,10 +788,11 @@ function renderGame(dt = 0.016) {
 
     // Smoothly glide start pad back to center (0, 0.06, 2)
     if (state.currentPlatform && state.currentPlatform.group) {
-      const curPadX = THREE.MathUtils.lerp(0.95, 0, t);
+      const curPadX = THREE.MathUtils.lerp(1.35, 0, t);
       state.currentPlatform.group.position.x = curPadX;
       state.currentPlatform.x = curPadX;
     }
+
 
     // Smoothly interpolate camera
     camera.position.x = THREE.MathUtils.lerp(startCamX, targetCamX, t);
