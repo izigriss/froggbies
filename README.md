@@ -62,7 +62,7 @@ This project is completely buildable and runnable directly from this repository.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/21naimish21/froggbies-sky-and-abyss.git
+git clone https://github.com/ace-ify/froggbies-sky-and-abyss.git
 cd froggbies-sky-and-abyss
 
 # 2. Install dependencies
