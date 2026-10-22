@@ -10,15 +10,6 @@
 
 > **Froggbies: Sky and Abyss** is a high-velocity, tactile 3D procedural arcade river runner running entirely in the browser. Leap across roaring canyon rapids, master real-time cedar log balancing physics, whip a 3D grappling spring tongue to capture fireflies, and unleash 5x Fever shockwaves across shifting seasonal biomes.
 
----
-
-## 📢 Repository Visibility Guarantee
-
-> [!IMPORTANT]
-> **Public Repository Mandate**: In strict compliance with submission and evaluation regulations, this repository is and will remain **PUBLIC until at least October 30, 2026**. Evaluators and reviewers are guaranteed uninterrupted, public read/clone access throughout the judging and verification period.
-
----
-
 ## 🎮 Gameplay & Technical Highlights
 
 - **Dynamic Procedural 3D Rapids**: Infinite forward-scrolling river canyon with real-time GLSL water displacement and foam edge shaders.
