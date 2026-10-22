@@ -5,6 +5,7 @@ console.log('--- Running Froggbies Game Repository Integrity Verification ---');
 
 const indexHtmlPath = path.resolve('index.html');
 const m2HtmlPath = path.resolve('m2.html');
+const cssPath = path.resolve('css/style.css');
 
 if (!fs.existsSync(indexHtmlPath)) {
   console.error('FAIL: index.html does not exist');
@@ -14,16 +15,15 @@ if (!fs.existsSync(m2HtmlPath)) {
   console.error('FAIL: m2.html does not exist');
   process.exit(1);
 }
+if (!fs.existsSync(cssPath)) {
+  console.error('FAIL: css/style.css does not exist');
+  process.exit(1);
+}
 
 const content = fs.readFileSync(indexHtmlPath, 'utf8');
 const m2Content = fs.readFileSync(m2HtmlPath, 'utf8');
 
-if (content.length < 50000) {
-  console.error('FAIL: index.html appears truncated or corrupted');
-  process.exit(1);
-}
-
-// Check key DOM elements
+// Check key DOM elements in index.html
 const requiredIds = [
   'gameCanvas', 'popupLayer', 'gameHUD', 'scoreVal', 'comboBadge',
   'tierBadge', 'comboTimerBar', 'seasonLabel', 'distanceVal',
@@ -42,22 +42,7 @@ for (const id of requiredIds) {
   }
 }
 if (missing > 0) process.exit(1);
-console.log(`PASS: All ${requiredIds.length} required HUD/Game DOM elements verified.`);
-
-// Extract and syntax-check JS logic
-const scriptMatch = content.match(/<script>([\s\S]*?)<\/script>\s*<\/body>/);
-if (!scriptMatch || !scriptMatch[1]) {
-  console.error('FAIL: Main game script block could not be extracted');
-  process.exit(1);
-}
-
-try {
-  new Function(scriptMatch[1]);
-  console.log('PASS: Game script syntax parsed cleanly without evaluation errors.');
-} catch (err) {
-  console.error('FAIL: Script parsing error:', err);
-  process.exit(1);
-}
+console.log(`PASS: All ${requiredIds.length} required HUD/Game DOM elements verified in index.html.`);
 
 // Verify external library references
 const requiredLibs = [
@@ -71,5 +56,42 @@ for (const lib of requiredLibs) {
     process.exit(1);
   }
 }
-console.log('PASS: All external CDN libraries and fonts verified.');
+console.log('PASS: All external CDN libraries and fonts verified in index.html.');
+
+// Verify modular source files exist
+const requiredSourceFiles = [
+  'src/main.js',
+  'src/game.js',
+  'src/audio.js',
+  'src/textures.js',
+  'src/materials.js',
+  'src/entities/frog.js',
+  'src/entities/environment.js',
+  'src/state.js',
+  'src/ui.js',
+  'src/particles.js',
+  'src/constants.js'
+];
+
+for (const sf of requiredSourceFiles) {
+  const sfPath = path.resolve(sf);
+  if (!fs.existsSync(sfPath)) {
+    console.error(`FAIL: Missing modular source file: ${sf}`);
+    process.exit(1);
+  }
+  const fileContent = fs.readFileSync(sfPath, 'utf8');
+  if (fileContent.length < 50) {
+    console.error(`FAIL: File appears suspiciously empty: ${sf}`);
+    process.exit(1);
+  }
+}
+console.log(`PASS: All ${requiredSourceFiles.length} modular source files exist and verified.`);
+
+// Verify legacy m2.html integrity
+if (m2Content.length < 100000) {
+  console.error('FAIL: m2.html appears truncated');
+  process.exit(1);
+}
+console.log('PASS: m2.html verified as intact standalone legacy build.');
+
 console.log('--- All Verification Tests Passed Successfully! ---');

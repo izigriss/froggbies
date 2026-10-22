@@ -1,0 +1,213 @@
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #030712;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #f8fafc;
+}
+
+.game-font {
+  font-family: 'Fredoka', 'Inter', sans-serif;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  touch-action: none;
+  outline: none;
+}
+
+.canyon-edge-vignette {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 58%, rgba(2, 6, 23, 0.55) 100%);
+  z-index: 10;
+}
+
+/* Crisp Chunky 3D Extruded Game Title */
+.game-logo-3d {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.6rem, 8.5vw, 6.8rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: #86efac;
+  -webkit-text-stroke: 3.5px #052e16;
+  paint-order: stroke fill;
+  text-shadow:
+    0 6px 0 #052e16,
+    0 12px 24px rgba(0, 0, 0, 0.65);
+  transform: rotate(-2deg);
+}
+
+.game-sublogo-pill {
+  display: inline-block;
+  background: #052e16;
+  color: #fde047;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  border: 2.5px solid #22c55e;
+  box-shadow: 0 4px 0 #02170b, 0 8px 16px rgba(0, 0, 0, 0.45);
+  transform: rotate(-1.5deg);
+}
+
+/* Tactile Solid Game HUD & Buttons */
+.tactile-hud-pill {
+  background: #0f172a;
+  border: 3px solid #1e293b;
+  box-shadow: 0 5px 0 #020617, 0 10px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+}
+
+.tactile-icon-btn {
+  background: #1e293b;
+  border: 3px solid #334155;
+  box-shadow: 0 4px 0 #090d16;
+  border-radius: 14px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
+  cursor: pointer;
+}
+
+.tactile-icon-btn:hover {
+  background: #334155;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #090d16;
+}
+
+.tactile-icon-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #090d16;
+}
+
+/* Chunky 3D Arcade Play Button */
+.btn-tactile-play {
+  background: #22c55e;
+  color: #052e16;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 900;
+  border: 3.5px solid #052e16;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 4px 0 #86efac,
+    0 7px 0 #052e16,
+    0 14px 28px rgba(0, 0, 0, 0.55);
+  transition: transform 0.08s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.08s ease, background 0.12s ease;
+  cursor: pointer;
+}
+
+.btn-tactile-play:hover {
+  background: #4ade80;
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 4px 0 #bbf7d0,
+    0 10px 0 #052e16,
+    0 18px 32px rgba(0, 0, 0, 0.65);
+}
+
+.btn-tactile-play:active {
+  transform: translateY(5px);
+  box-shadow:
+    inset 0 2px 0 #86efac,
+    0 2px 0 #052e16,
+    0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Crisp Outlined Floating Game Text */
+.knockout-banner-text {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4.4rem);
+  line-height: 0.95;
+  color: #ffffff;
+  -webkit-text-stroke: 3.5px #090d16;
+  paint-order: stroke fill;
+  text-shadow: 0 6px 0 #090d16, 0 12px 28px rgba(0, 0, 0, 0.75);
+}
+
+.knockout-sub-pill {
+  background: #090d16;
+  color: #fde047;
+  border: 2.5px solid #334155;
+  box-shadow: 0 4px 0 #020617;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+}
+
+.tactile-stat-badge {
+  background: #0f172a;
+  border: 3px solid #334155;
+  box-shadow: 0 6px 0 #020617, 0 10px 24px rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+}
+
+.score-pop {
+  position: absolute;
+  pointer-events: none;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  color: #facc15;
+  -webkit-text-stroke: 2.5px #090d16;
+  paint-order: stroke fill;
+  text-shadow: 0 3px 0 #090d16;
+  animation: float-up-fade 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 25;
+  white-space: nowrap;
+}
+
+@keyframes float-up-fade {
+  0% { opacity: 0; transform: translate(-50%, 14px) scale(0.6) rotate(-4deg); }
+  25% { opacity: 1; transform: translate(-50%, -12px) scale(1.25) rotate(2deg); }
+  100% { opacity: 0; transform: translate(-50%, -60px) scale(0.92); }
+}
+
+@keyframes hud-drop-in {
+  0% { opacity: 0; transform: translateY(-28px) scale(0.85); }
+  70% { opacity: 1; transform: translateY(4px) scale(1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes hud-rise-up {
+  0% { opacity: 0; transform: translateY(36px) scale(0.88); }
+  70% { opacity: 1; transform: translateY(-4px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes badge-pop {
+  0% { opacity: 0; transform: scale(0.4) translateY(16px); }
+  75% { opacity: 1; transform: scale(1.08) translateY(-3px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.anim-drop-in { animation: hud-drop-in 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.anim-rise-up { animation: hud-rise-up 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both; }
+.badge-pop-1 { animation: badge-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) 0.06s both; }
+.badge-pop-2 { animation: badge-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) 0.14s both; }
+.badge-pop-3 { animation: badge-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) 0.22s both; }
+.badge-pop-4 { animation: badge-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) 0.30s both; }
+
+.kbd-key {
+  display: inline-block;
+  background: #1e293b;
+  color: #f8fafc;
+  border: 2px solid #475569;
+  box-shadow: 0 3px 0 #090d16;
+  border-radius: 7px;
+  padding: 1px 7px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+}

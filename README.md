@@ -117,9 +117,10 @@ npm test
 Expected output:
 ```
 --- Running Froggbies Game Repository Integrity Verification ---
-PASS: All 28 required HUD/Game DOM elements verified.
-PASS: Game script syntax parsed cleanly without evaluation errors.
-PASS: All external CDN libraries and fonts verified.
+PASS: All 28 required HUD/Game DOM elements verified in index.html.
+PASS: All external CDN libraries and fonts verified in index.html.
+PASS: All 11 modular source files exist and verified.
+PASS: m2.html verified as intact standalone legacy build.
 --- All Verification Tests Passed Successfully! ---
 ```
 
@@ -128,18 +129,35 @@ PASS: All external CDN libraries and fonts verified.
 ## 📁 Repository Structure
 
 ```
+c:/ace/m2/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml             # GitHub Actions CI/CD test, build, and Pages deployment
+├── css/
+│   └── style.css              # Extracted tactile arcade HUD styling & animations
 ├── scripts/
 │   └── validate.js            # Automated integrity & DOM parser test script
+├── src/
+│   ├── audio.js               # Procedural Web Audio API sound synthesizer (SoundFX)
+│   ├── constants.js           # Seasonal biomes, game dimensions & storage helpers
+│   ├── game.js                # Core game mechanics, leaps, collisions & river cycle
+│   ├── main.js                # Game orchestrator, render loop & event listeners
+│   ├── materials.js           # Three.js shared materials & procedural geometries
+│   ├── particles.js           # 3D water ripples, splash particles & score popups
+│   ├── state.js               # Central game state management
+│   ├── textures.js            # Procedural Canvas 2D PBR textures (skin, bark, rocks)
+│   ├── ui.js                  # DOM HUD references, scorecard rollup & UI bindings
+│   └── entities/
+│       ├── environment.js     # Procedural river terrain, pads, logs, hornets & flies
+│       └── frog.js            # Procedural 3D frog model, articulated limbs & tongue
 ├── .gitattributes             # Line-ending normalization rules
 ├── .gitignore                 # Build artifacts & dependency ignore patterns
+├── AI_DISCLOSURE.md           # Formal disclosure of AI models and assisted components
 ├── ATTRIBUTION.md             # Formal open-source attribution notice
 ├── LICENSE                    # MIT open-source license
 ├── README.md                  # Comprehensive project documentation (this file)
-├── index.html                 # Primary game entry point (bit-for-bit identical to m2.html)
-├── m2.html                    # Preserved standalone legacy entry point
+├── index.html                 # Clean modular game entry point
+├── m2.html                    # Preserved standalone original single-file legacy build
 ├── package.json               # Project manifest, dependencies, and build scripts
 ├── package-lock.json          # Deterministic dependency tree lockfile
 └── vite.config.js             # Multi-page Vite production bundler configuration
