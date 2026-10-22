@@ -154,8 +154,6 @@ c:/ace/m2/
 │       └── frog.js            # Procedural 3D frog model, articulated limbs & tongue
 ├── .gitattributes             # Line-ending normalization rules
 ├── .gitignore                 # Build artifacts & dependency ignore patterns
-├── AI_DISCLOSURE.md           # Formal disclosure of AI models and assisted components
-├── ATTRIBUTION.md             # Formal open-source attribution notice
 ├── LICENSE                    # MIT open-source license
 ├── README.md                  # Comprehensive project documentation (this file)
 ├── index.html                 # Clean modular game entry point
@@ -173,8 +171,6 @@ c:/ace/m2/
 - **Assets**: 100% procedural in-engine generation. No external 3D models, textures, or audio recordings are imported.
 - **Genre Inspiration**: Classic arcade river-crossing mechanics (*Frogger*, *Crossy Road*), developed into an original 3D action runner with dynamic log physics and 5x fever shockwaves.
 
-*For detailed license links and author notices, see [ATTRIBUTION.md](ATTRIBUTION.md).*
-
 ---
 
 ## 🤖 AI Disclosure
@@ -184,8 +180,6 @@ In compliance with submission guidelines, the following AI tools and coding assi
 - **Claude Code**: Terminal-based autonomous coding agent used for modular architecture refactoring, project restructuring, and build pipeline setup.
 - **JetBrains AI Assistant / Junie**: In-IDE agentic assistant used for code analysis, linting verification, and cross-module inspection in WebStorm / IntelliJ IDEA.
 - **Gemini**: Used for formulating procedural Three.js character geometries, log roll rotational physics, and Web Audio API synthesizer frequency calculations.
-
-*For complete component breakdown, see [AI_DISCLOSURE.md](AI_DISCLOSURE.md).*
 
 ---
 
