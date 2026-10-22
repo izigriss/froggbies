@@ -1,0 +1,22 @@
+{
+  "name": "froggbies-sky-and-abyss",
+  "version": "1.0.0",
+  "description": "Froggbies: Sky and Abyss - High-velocity 3D procedural arcade web game built with Three.js and procedural Web Audio API",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -l 3000",
+    "dev": "npx serve . -l 3000",
+    "serve": "npx serve . -l 3000",
+    "test": "node -e \"const fs = require('fs'); const code = fs.readFileSync('index.html', 'utf8'); const match = code.match(/<script>([\\s\\S]*?)<\\/script>\\s*<\\/body>/); if (!match) throw new Error('Script tag missing'); new Function(match[1]); console.log('Validation passed: JS syntax valid');\""
+  },
+  "keywords": [
+    "froggbies",
+    "threejs",
+    "webgl",
+    "arcade-game",
+    "procedural-generation",
+    "web-audio-api"
+  ],
+  "author": "Naimish Singh",
+  "license": "MIT"
+}
