@@ -1,50 +1,62 @@
-# Attribution and Third-Party Notices
+# Attribution and Third-Party Asset Notices
 
-This project, **Froggbies: Sky and Abyss**, adheres to open-source compliance standards and transparently discloses all third-party libraries, assets, inspirations, and AI tools used.
+This project, **Froggbies: Sky and Abyss**, adheres to open-source compliance standards and transparently discloses all third-party libraries, assets, conceptual inspirations, and AI tool usage.
 
 ---
 
-## 1. Third-Party Libraries and Fonts
+## 1. Third-Party Libraries, Frameworks & Fonts
 
-| Asset / Library | Version | Source / CDN | Purpose | License |
+The following external libraries and typography assets are loaded via secure public CDNs:
+
+| Asset / Library | Version | Source / CDN Repository | Purpose | License & Copyright |
 | :--- | :--- | :--- | :--- | :--- |
-| **Three.js** | r128 | [cdnjs CDN](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js) / [GitHub](https://github.com/mrdoob/three.js) | 3D WebGL rendering, scene graph, cameras, lighting, raycasting, mesh creation, and custom shader materials | [MIT License](https://github.com/mrdoob/three.js/blob/dev/LICENSE) |
-| **Tailwind CSS** | 3.4.17 | [Tailwind CDN](https://cdn.tailwindcss.com/3.4.17) / [GitHub](https://github.com/tailwindlabs/tailwindcss) | Responsive layout, UI overlays, HUD typography, tactile button styling | [MIT License](https://github.com/tailwindlabs/tailwindcss/blob/master/LICENSE) |
-| **Fredoka Font** | Variable | [Google Fonts](https://fonts.google.com/specimen/Fredoka) | Chunky arcade title and HUD numerical typography | [SIL Open Font License 1.1](https://openfontlicense.org/) |
-| **Inter Font** | Variable | [Google Fonts](https://fonts.google.com/specimen/Inter) | Clean interface body text and instruction guides | [SIL Open Font License 1.1](https://openfontlicense.org/) |
+| **Three.js** | `r128` | • [cdnjs CDN](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js)<br>• [GitHub Repository](https://github.com/mrdoob/three.js) | 3D WebGL renderer, scene graph hierarchy, perspective camera, lighting, raycaster targeting, and custom shader materials. | **MIT License**<br>Copyright (c) 2010-2026 Three.js Authors (Ricardo Cabello / mrdoob) |
+| **Tailwind CSS** | `3.4.17` | • [Tailwind CDN](https://cdn.tailwindcss.com/3.4.17)<br>• [GitHub Repository](https://github.com/tailwindlabs/tailwindcss) | Rapid utility CSS styling for HUD overlays, tactile 3D buttons, and responsive layout constraints. | **MIT License**<br>Copyright (c) Tailwind Labs, Inc. |
+| **Fredoka Font** | Variable | • [Google Fonts](https://fonts.google.com/specimen/Fredoka)<br>• [GitHub Specimen](https://github.com/haank/Fredoka-One) | Heavy, tactile arcade typography for title display, combo counters, and game-over statistics. | **SIL Open Font License 1.1**<br>Copyright (c) 2011 Milena Brandao |
+| **Inter Font** | Variable | • [Google Fonts](https://fonts.google.com/specimen/Inter)<br>• [GitHub Repository](https://github.com/rsms/inter) | High-legibility UI typography for HUD labels, control hints, and field guide modal dialogs. | **SIL Open Font License 1.1**<br>Copyright (c) 2016-2026 Rasmus Andersson |
 
 ---
 
-## 2. Procedural Assets (Visual & Audio)
+## 2. In-Engine Procedural Generation (Zero External Files)
 
-All in-game graphics, 3D meshes, textures, and sound effects are **100% procedurally generated in code** without relying on external proprietary asset packs or pre-recorded audio files:
+To minimize bundle size, eliminate external latency, and ensure 100% offline self-containment, all graphics, 3D meshes, textures, and sounds are mathematically generated at runtime in procedural code:
 
-- **3D Geometry & Models**:
-  - Procedural Frog Character: Built entirely using composite Three.js primitives (`SphereGeometry`, `CylinderGeometry`, `BoxGeometry`) with animated limb pivots and eye blinks.
-  - River Environments & Hazards: Procedural lily pads, cedar logs, spring mushrooms, whirlpools, murder hornets, and luminous fireflies created through native Three.js geometry classes.
-  - Shaders: Custom GLSL vertex and fragment shaders for real-time water wave propagation and foam rim lighting.
-- **Audio & Sound FX**:
-  - Procedural Web Audio API: All game audio (spring leaps, water splashes, tongue whip grapple, combo shockwaves, firefly chime collects, hornet sting buzz, wipeout sounds) is synthesized in real time via native browser `AudioContext` oscillators (sine, square, triangle, sawtooth) and biquad filter sweeps.
-  - Zero external MP3, OGG, or WAV audio files were used.
+### Visual Assets & 3D Geometry
+- **Character Geometry**: The frog is procedurally constructed using composite Three.js primitives (`SphereGeometry`, `CylinderGeometry`, `BoxGeometry`) with animated skeletal limb pivots, blinking eye lids, and dynamic jaw motion.
+- **River Hazards & Platforms**: Lily pads, rolling cedar logs with procedural bark striations, spring mushrooms, whirlpool vortices, murder hornets, and luminous fireflies are all procedurally synthesized.
+- **Procedural Canvas Textures**:
+  - Amphibian dorsal skin texture generated with organic pore distribution and leopard spots.
+  - River water normal/bump map generated via randomized elliptical ripples.
+  - Cedar log bark generated with layered linear gradient striations and lichen splotches.
+  - Granite canyon cliffs generated with multi-pass randomized noise stippling.
+- **Shaders**: Custom GLSL vertex displacement and fragment foam rim lighting for realistic water flow.
+
+### Procedural Audio Engine
+- **Web Audio API**: All sound effects (spring leaping, river splashes, tongue grapple snatch, 5x combo fever shockwave, firefly collect chime, bee stings, and wipeout bubbling) are synthesized on-the-fly using native browser `AudioContext` oscillators (sine, square, triangle, sawtooth waves) and exponential gain decay envelopes.
+- **No external `.mp3`, `.ogg`, or `.wav` audio files** are used or included.
 
 ---
 
 ## 3. Game Concept & Inspirations
 
-- Conceptually inspired by classic arcade river crossing games (such as *Frogger* by Konami and *Crossy Road* by Hipster Whale), transformed into an intense 3D roguelike canyon runner featuring log balance physics, tongue grappling mechanics, seasonal biome cycling, dynamic combo fever meters, and real-time raycasting controls.
+- The core gameplay loop is inspired by the classic arcade river crossing genre (*Frogger* by Konami, *Crossy Road* by Hipster Whale), reimagined as a fast-action 3D canyon runner featuring dynamic log roll physics, tongue grapple targeting, 5x fever combos, and multi-season biome transitions.
+- References the community web game prototype "Froggy Firefly" by `@h3katonkheir` on Upit ([https://upit.com/@h3katonkheir/play/9n0Y6lZtmT](https://upit.com/@h3katonkheir/play/9n0Y6lZtmT)).
 
 ---
 
 ## 4. AI Tools Disclosure
 
-In accordance with competition and transparency guidelines, the following AI tools and their specific roles are disclosed:
+In accordance with competition rules and transparency guidelines:
 
-| AI Tool / Model | Scope & Part of Project |
+| AI Tool / Assistant | Tasks and Parts of the Project |
 | :--- | :--- |
-| **Google Gemini 3.8 Flash (High)** via **Antigravity Agentic IDE** | • Procedural 3D scene design & Three.js geometry scripting<br>• Custom GLSL water surface shaders & canyon environmental biome transitions<br>• Real-time procedural Web Audio synthesizer oscillator formulas<br>• Responsive game HUD, tactile arcade controls, and touch/raycast event architecture<br>• Game state machine logic, collision detection, combo score multipliers, and local storage persistence<br>• Code optimization, linting validation, and project documentation (README, ATTRIBUTION, LICENSE) |
+| **Google Gemini 3.8 Flash (High)** via **Antigravity Agentic IDE** | • Formulating procedural 3D Three.js primitive assemblies and limb joint hierarchies.<br>• Synthesizing procedural Canvas 2D texture algorithms (skin pores, bark grain, bump maps).<br>• Calculating Web Audio API oscillator frequencies, chord structures, and envelope ramps.<br>• Architecting log roll balance physics, tongue spring interpolation, and raycast hit detection.<br>• Designing responsive tactile HUD styling, score popups, and diegetic button layouts with Tailwind CSS.<br>• Structuring Vite production build configurations, automated test suites, CI/CD pipelines, and project documentation. |
 
 ---
 
 ## 5. Software License
 
-The source code for **Froggbies: Sky and Abyss** is open source and available under the terms of the [MIT License](LICENSE).
+The source code and project assets are licensed under the **MIT License**.
+See the [LICENSE](LICENSE) file in the root directory for the complete license text.
+
+Copyright (c) 2026 **Naimish Singh**. All rights reserved.

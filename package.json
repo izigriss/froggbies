@@ -1,13 +1,15 @@
 {
   "name": "froggbies-sky-and-abyss",
   "version": "1.0.0",
-  "description": "Froggbies: Sky and Abyss - High-velocity 3D procedural arcade web game built with Three.js and procedural Web Audio API",
-  "main": "index.html",
+  "description": "Froggbies: Sky and Abyss - High-velocity 3D procedural arcade web game built with Three.js and Web Audio API",
+  "type": "module",
   "scripts": {
-    "start": "npx serve . -l 3000",
-    "dev": "npx serve . -l 3000",
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "serve": "npx serve . -l 3000",
-    "test": "node -e \"const fs = require('fs'); const code = fs.readFileSync('index.html', 'utf8'); const match = code.match(/<script>([\\s\\S]*?)<\\/script>\\s*<\\/body>/); if (!match) throw new Error('Script tag missing'); new Function(match[1]); console.log('Validation passed: JS syntax valid');\""
+    "test": "node scripts/validate.js"
   },
   "keywords": [
     "froggbies",
@@ -18,5 +20,8 @@
     "web-audio-api"
   ],
   "author": "Naimish Singh",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
 }
