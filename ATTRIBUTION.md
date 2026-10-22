@@ -37,10 +37,9 @@ To minimize bundle size, eliminate external latency, and ensure 100% offline sel
 
 ---
 
-## 3. Game Concept & Inspirations
+## 3. Game Concept & Genre Inspiration
 
-- The core gameplay loop is inspired by the classic arcade river crossing genre (*Frogger* by Konami, *Crossy Road* by Hipster Whale), reimagined as a fast-action 3D canyon runner featuring dynamic log roll physics, tongue grapple targeting, 5x fever combos, and multi-season biome transitions.
-- References the community web game prototype "Froggy Firefly" by `@h3katonkheir` on Upit ([https://upit.com/@h3katonkheir/play/9n0Y6lZtmT](https://upit.com/@h3katonkheir/play/9n0Y6lZtmT)).
+- **Arcade River-Crossing Genre**: Gameplay loop broadly draws genre inspiration from classic river-crossing arcade mechanics (*Frogger*, *Crossy Road*), developed into an original 3D canyon action runner featuring procedural rapid generation, real-time log roll balancing physics, tongue grapple targeting, 5x fever combos, and multi-season biome transitions.
 
 ---
 
@@ -48,9 +47,11 @@ To minimize bundle size, eliminate external latency, and ensure 100% offline sel
 
 In accordance with competition rules and transparency guidelines:
 
-| AI Tool / Assistant | Tasks and Parts of the Project |
+| AI Tool / Assistant | Scope & Parts of the Project |
 | :--- | :--- |
-| **Google Gemini 3.8 Flash (High)** via **Antigravity Agentic IDE** | • Formulating procedural 3D Three.js primitive assemblies and limb joint hierarchies.<br>• Synthesizing procedural Canvas 2D texture algorithms (skin pores, bark grain, bump maps).<br>• Calculating Web Audio API oscillator frequencies, chord structures, and envelope ramps.<br>• Architecting log roll balance physics, tongue spring interpolation, and raycast hit detection.<br>• Designing responsive tactile HUD styling, score popups, and diegetic button layouts with Tailwind CSS.<br>• Structuring Vite production build configurations, automated test suites, CI/CD pipelines, and project documentation. |
+| **Claude Code** | • Modular architecture refactoring: structured monolith into separate ES modules (`src/`, `css/`).<br>• Tooling & validation: Vite bundling configuration, integrity verification script (`scripts/validate.js`), and GitHub Actions CI. |
+| **JetBrains AI Assistant / Junie** | • IDE-level code analysis, linting verification, parameter auto-completion, and codebase inspection. |
+| **Gemini** | • Assisted with procedural Three.js character geometries, log roll rotational physics, and GLSL wave shaders.<br>• Assisted in Web Audio oscillator frequency calculations and audio envelope curves. |
 
 ---
 

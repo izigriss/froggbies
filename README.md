@@ -62,7 +62,7 @@ This project is completely buildable and runnable directly from this repository.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/ace-ify/froggbies-sky-and-abyss.git
+git clone https://github.com/izigriss/froggbies.git
 cd froggbies-sky-and-abyss
 
 # 2. Install dependencies
@@ -86,17 +86,17 @@ npm run build
 npm run preview
 ```
 
-The production output is generated in `./dist/index.html` (along with `./dist/m2.html`), completely minified and ready for CDN or static deployment.
+The production output is generated in `./dist/index.html` (along with `./dist/froggbies.html`), completely minified and ready for CDN or static deployment.
 
 ---
 
 ### Method 3: Instant Zero-Install Direct Run
 
-No Node.js or build tools required! Simply open the entry point in any browser:
+No Node.js or build tools required! Simply open the standalone single-file build in any browser:
 
-- **macOS**: `open index.html`
-- **Linux**: `xdg-open index.html`
-- **Windows**: `start index.html` (or double-click `index.html` / `m2.html` in File Explorer)
+- **macOS**: `open dist/froggbies.html`
+- **Linux**: `xdg-open dist/froggbies.html`
+- **Windows**: `start dist/froggbies.html` (or double-click `dist/froggbies.html` in File Explorer)
 
 Or via Python's built-in static HTTP server:
 ```bash
@@ -120,7 +120,7 @@ Expected output:
 PASS: All 28 required HUD/Game DOM elements verified in index.html.
 PASS: All external CDN libraries and fonts verified in index.html.
 PASS: All 11 modular source files exist and verified.
-PASS: m2.html verified as intact standalone legacy build.
+PASS: dist/froggbies.html verified as intact standalone single-file build.
 --- All Verification Tests Passed Successfully! ---
 ```
 
@@ -135,6 +135,8 @@ c:/ace/m2/
 │       └── ci.yml             # GitHub Actions CI/CD test, build, and Pages deployment
 ├── css/
 │   └── style.css              # Extracted tactile arcade HUD styling & animations
+├── dist/
+│   └── froggbies.html         # Standalone single-file HTML build (direct browser launch)
 ├── scripts/
 │   └── validate.js            # Automated integrity & DOM parser test script
 ├── src/
@@ -157,7 +159,6 @@ c:/ace/m2/
 ├── LICENSE                    # MIT open-source license
 ├── README.md                  # Comprehensive project documentation (this file)
 ├── index.html                 # Clean modular game entry point
-├── m2.html                    # Preserved standalone original single-file legacy build
 ├── package.json               # Project manifest, dependencies, and build scripts
 ├── package-lock.json          # Deterministic dependency tree lockfile
 └── vite.config.js             # Multi-page Vite production bundler configuration
@@ -165,33 +166,26 @@ c:/ace/m2/
 
 ---
 
-## 📦 Third-Party Assets & Attribution
+## 📦 Attribution & Third-Party Notice
 
-All external dependencies, libraries, and design assets are permissively licensed:
+- **Libraries**: Three.js (`r128`, MIT) & Tailwind CSS (`3.4.17`, MIT).
+- **Fonts**: Fredoka & Inter (Google Fonts, SIL Open Font License 1.1).
+- **Assets**: 100% procedural in-engine generation. No external 3D models, textures, or audio recordings are imported.
+- **Genre Inspiration**: Classic arcade river-crossing mechanics (*Frogger*, *Crossy Road*), developed into an original 3D action runner with dynamic log physics and 5x fever shockwaves.
 
-| Asset / Dependency | Version | Source / CDN URL | Purpose | License |
-| :--- | :--- | :--- | :--- | :--- |
-| **Three.js** | r128 | [cdnjs Three.js](https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js) / [GitHub](https://github.com/mrdoob/three.js) | 3D WebGL renderer, scene graph, raycasting, camera, procedural geometry | [MIT License](https://github.com/mrdoob/three.js/blob/dev/LICENSE) |
-| **Tailwind CSS** | 3.4.17 | [Tailwind CDN](https://cdn.tailwindcss.com/3.4.17) / [GitHub](https://github.com/tailwindlabs/tailwindcss) | Tactical UI styling, typography, and responsive HUD overlays | [MIT License](https://github.com/tailwindlabs/tailwindcss/blob/master/LICENSE) |
-| **Fredoka Font** | Variable | [Google Fonts](https://fonts.google.com/specimen/Fredoka) | Heavy chunky arcade typography and HUD counters | [SIL Open Font License 1.1](https://openfontlicense.org/) |
-| **Inter Font** | Variable | [Google Fonts](https://fonts.google.com/specimen/Inter) | Clean interface text, dialogs, and field guide | [SIL Open Font License 1.1](https://openfontlicense.org/) |
-
-### Procedural Asset Guarantee
-- **Zero External 3D Models**: No external binary 3D assets (`.gltf`, `.glb`, `.obj`, `.fbx`) are loaded. Every model (frog, lily pad, cedar log, fly, hornet, mushroom) is mathematically constructed at runtime via Three.js primitives.
-- **Zero External Audio Files**: No pre-recorded audio files (`.mp3`, `.ogg`, `.wav`) are loaded. All sound effects are mathematically generated at runtime via the browser's native Web Audio API oscillators and gain envelopes.
-- **Zero External Textures**: All textures (amphibian dorsal spots, water normals, cedar bark striations, granite rock grain) are procedurally painted using HTML5 Canvas 2D API at startup.
-
-*For full attribution details, see [ATTRIBUTION.md](ATTRIBUTION.md).*
+*For detailed license links and author notices, see [ATTRIBUTION.md](ATTRIBUTION.md).*
 
 ---
 
-## 🤖 AI Tools Disclosure
+## 🤖 AI Disclosure
 
-In accordance with competition rules and academic/open-source transparency guidelines:
+In compliance with submission guidelines, the following AI tools and coding assistants were utilized:
 
-| AI Tool / Model | Scope & Part of Project |
-| :--- | :--- |
-| **Google Gemini 3.8 Flash (High)** via **Antigravity Agentic IDE** | • **Procedural Math & 3D Geometry**: Assisted in formulating procedural Three.js character geometries, dynamic log rolling rotational physics, and GLSL water ripple vertex/fragment shaders.<br>• **Web Audio Synthesizer**: Assisted in calculating oscillator frequency ramps, exponential decay envelopes, and harmonic chords for sound effects.<br>• **Tactile UI & HUD Styling**: Assisted in styling diegetic buttons, floating score popups, and HUD layout using Tailwind CSS.<br>• **State & Collision Architecture**: Assisted in structuring state machine transitions, leap interpolation curves, and raycast hit detection.<br>• **Build & Tooling Setup**: Configured Vite build pipeline, automated integrity test runner (`scripts/validate.js`), GitHub Actions CI/CD workflow, and documentation. |
+- **Claude Code**: Terminal-based autonomous coding agent used for modular architecture refactoring, project restructuring, and build pipeline setup.
+- **JetBrains AI Assistant / Junie**: In-IDE agentic assistant used for code analysis, linting verification, and cross-module inspection in WebStorm / IntelliJ IDEA.
+- **Gemini**: Used for formulating procedural Three.js character geometries, log roll rotational physics, and Web Audio API synthesizer frequency calculations.
+
+*For complete component breakdown, see [AI_DISCLOSURE.md](AI_DISCLOSURE.md).*
 
 ---
 

@@ -7,10 +7,10 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 export default defineConfig({
   base: './',
   build: {
+    emptyOutDir: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        m2: resolve(__dirname, 'm2.html'),
       },
     },
     outDir: 'dist',

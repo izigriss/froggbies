@@ -13,26 +13,24 @@ This disclosure statement complies with competition requirements, open-source co
 
 ### 1. AI Tools Utilized
 
-- **Primary AI Assistant / Model**: Google Gemini 3.8 Flash (High)
-- **Development Environment**: Antigravity Agentic IDE
+- **Claude Code**: Terminal-based autonomous coding agent by Anthropic used for modular refactoring, file architecture, and build pipeline setup.
+- **JetBrains AI Assistant / Junie**: In-IDE agentic assistant powering codebase inspection, type checking, and code navigation within WebStorm / IntelliJ IDEA.
+- **Gemini**: Used for procedural mathematical formulations, Three.js geometry scripting, and Web Audio API oscillator synthesis.
 
 ---
 
 ### 2. Specific Scope and Parts of the Project
 
-The AI tool was utilized under the direction and supervision of the author across the following specific parts of the project:
+The AI tools were utilized under the direction and supervision of the author across the following specific parts of the project:
 
-| Component / Subsystem | Specific AI Contribution |
+| Tool / Assistant | Scope & Parts of the Project |
 | :--- | :--- |
-| **3D Graphics & Shaders** | • Assisted in calculating Three.js geometric coordinates for composite character and hazard meshes.<br>• Assisted in formulating custom GLSL vertex wave displacement and fragment foam lighting shaders. |
-| **Procedural Textures** | • Assisted in developing HTML5 Canvas 2D procedural rendering functions for amphibian dorsal skin, bark grain, and water bump maps. |
-| **Procedural Audio Engine** | • Assisted in defining Web Audio API oscillator synthesis equations (frequency ramps, gain decay curves, harmonic overtone chords). |
-| **Game Physics & Mechanics** | • Assisted in formulating mathematical equations for lateral log sliding velocity, rotational inertia, tongue grapple spring damping, and raycast hit detection. |
-| **User Interface (HUD)** | • Assisted in drafting responsive Tailwind CSS tactile styling and diegetic controls. |
-| **DevOps, Tooling & Docs** | • Configured the Vite multi-page production bundler, automated test script (`scripts/validate.js`), GitHub Actions CI/CD workflow, and documentation files. |
+| **Claude Code** | • Modular repository refactoring: dispersed monolithic single-file code into clean ES modules (`src/audio.js`, `src/textures.js`, `src/game.js`, `src/ui.js`, `css/style.css`).<br>• Production tooling & CI/CD: configured Vite multi-page bundling, npm test verification runner (`scripts/validate.js`), and GitHub Actions deployment. |
+| **JetBrains AI Assistant / Junie** | • IDE-level code analysis, linting verification, parameter auto-completion, and cross-module reference auditing in WebStorm / IntelliJ. |
+| **Gemini** | • Assisted in formulating procedural Three.js character geometries, dynamic log rolling rotational physics, and GLSL water ripple vertex/fragment shaders.<br>• Assisted in calculating oscillator frequency ramps, exponential decay envelopes, and harmonic chords for real-time procedural sound effects. |
 
 ---
 
 ### 3. Human Direction and Validation
 
-All code, game mechanics, visual aesthetics, timing curves, audio synthesis parameters, and project configurations were iteratively directed, reviewed, tested, and validated by **Naimish Singh** to ensure optimal performance, gameplay balance, and zero software regressions.
+All game architecture, visual aesthetics, timing curves, audio synthesis parameters, gameplay balance, and project configurations were iteratively directed, reviewed, tested, and validated by **Naimish Singh** to ensure optimal performance and zero software regressions.

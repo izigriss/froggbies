@@ -4,15 +4,15 @@ import path from 'path';
 console.log('--- Running Froggbies Game Repository Integrity Verification ---');
 
 const indexHtmlPath = path.resolve('index.html');
-const m2HtmlPath = path.resolve('m2.html');
+const standaloneHtmlPath = path.resolve('dist/froggbies.html');
 const cssPath = path.resolve('css/style.css');
 
 if (!fs.existsSync(indexHtmlPath)) {
   console.error('FAIL: index.html does not exist');
   process.exit(1);
 }
-if (!fs.existsSync(m2HtmlPath)) {
-  console.error('FAIL: m2.html does not exist');
+if (!fs.existsSync(standaloneHtmlPath)) {
+  console.error('FAIL: dist/froggbies.html does not exist');
   process.exit(1);
 }
 if (!fs.existsSync(cssPath)) {
@@ -21,7 +21,7 @@ if (!fs.existsSync(cssPath)) {
 }
 
 const content = fs.readFileSync(indexHtmlPath, 'utf8');
-const m2Content = fs.readFileSync(m2HtmlPath, 'utf8');
+const standaloneContent = fs.readFileSync(standaloneHtmlPath, 'utf8');
 
 // Check key DOM elements in index.html
 const requiredIds = [
@@ -87,11 +87,11 @@ for (const sf of requiredSourceFiles) {
 }
 console.log(`PASS: All ${requiredSourceFiles.length} modular source files exist and verified.`);
 
-// Verify legacy m2.html integrity
-if (m2Content.length < 100000) {
-  console.error('FAIL: m2.html appears truncated');
+// Verify standalone froggbies.html integrity
+if (standaloneContent.length < 100000) {
+  console.error('FAIL: dist/froggbies.html appears truncated');
   process.exit(1);
 }
-console.log('PASS: m2.html verified as intact standalone legacy build.');
+console.log('PASS: dist/froggbies.html verified as intact standalone single-file build.');
 
 console.log('--- All Verification Tests Passed Successfully! ---');
